@@ -9,51 +9,64 @@ public abstract class Score implements MoneyInterface {
     private Account owner;
     private Integer number;
 
-    public Score(Money balance, Account owner, Integer number) {
+    protected Score(Money balance, Account owner, Integer number) {
         this.balance = balance;
         this.owner = owner;
         this.number = number;
     }
+
     public Money getBalance() {
-        return balance; }
+        return balance;
+    }
+
     public void setBalance(Money balance) {
         this.balance = balance;
     }
+
     public Account getOwner() {
         return owner;
     }
+
     public void setOwner(Account owner) {
         this.owner = owner;
-    } public Integer getNumber() {
+    }
+
+    public Integer getNumber() {
         return number;
-    } public void setNumber(Integer number) {
+    }
+
+    public void setNumber(Integer number) {
         this.number = number;
     }
-    @Override public void addMoney(Money money){
+
+    @Override
+    public void addMoney(Money money) {
         double usdValueIn = money.getValue() * money.getCurrency().getUsdCourse();
         double usdValueThis = this.balance.getValue() * this.balance.getCurrency().getUsdCourse();
-        if(usdValueThis < usdValueIn) {
+        if (usdValueThis < usdValueIn) {
             System.out.println("You have no so much!");
             return;
         }
-        if(checkBefore()) {
+        if (checkBefore()) {
             this.balance.setValue((usdValueThis + usdValueIn) * this.balance.getCurrency().getUsdCourse());
-        }
-        else {
+        } else {
             System.out.println("No check!");
         }
     }
 
     protected abstract boolean checkBefore();
 
-    @Override public Money getMoney(double balanceLess){ 
-        if(balanceLess > 30000) {
-        throw new IllegalArgumentException("Wrong balance less!");
-    }
-    this.balance.setValue(this.balance.getValue() - balanceLess);
+    @Override
+    public Money getMoney(double balanceLess) {
+        if (balanceLess > 30000) {
+            throw new IllegalArgumentException("Wrong balance less!");
+        }
+        this.balance.setValue(this.balance.getValue() - balanceLess);
         return this.balance;
     }
-    @Override public Money getMoneyWithoutLess(){
+
+    @Override
+    public Money getMoneyWithoutLess() {
         return this.balance;
     }
 }

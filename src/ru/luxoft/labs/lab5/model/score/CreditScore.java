@@ -12,11 +12,10 @@ public class CreditScore extends Score {
 
     @Override
     protected boolean checkBefore() {
-        //this.getMoneyWithoutLess();
         return false;
     }
 
-    public Money score(){
+    public Money score() {
         Scanner scanner = new Scanner(System.in);
         double withdraw = scanner.nextDouble();
         this.getMoney(withdraw);
