@@ -8,15 +8,19 @@ public class Stock {
         this.number = number;
         this.emmitent = emmitent;
     }
+
     public long getNumber() {
         return number;
     }
+
     public void setNumber(long number) {
         this.number = number;
     }
+
     public Emmitent getEmmitent() {
         return emmitent;
     }
+
     public void setEmmitent(Emmitent emmitent) {
         this.emmitent = emmitent;
     }
